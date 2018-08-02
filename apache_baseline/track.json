@@ -1,0 +1,35 @@
+{% import "rally.helpers" as rally with context %}
+
+{
+  "version": 2,
+  "description": "HTTP server log data for ingest - baseline",
+  "indices": [
+    {
+      "name": "logs",
+      "body": "index.json",
+      "types": ["_doc"]
+    }
+  ],
+  "corpora": [
+    {
+      "name": "apache_baseline",
+      "source-file": "/tmp/apache_access_logs.tar.gz",
+      "documents": [
+        {
+          "target-index": "logs",
+          "source-file": "/tmp/apache_access_logs.tar.gz",
+          "target-type": "_doc",
+          "document-count": 6900000,
+          "compressed-bytes": 152470581,
+          "uncompressed-bytes": 1555814737
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {{ rally.collect(parts="operations/*.json") }}
+  ],
+  "challenges": [
+    {{ rally.collect(parts="challenges/*.json") }}
+  ]
+}
