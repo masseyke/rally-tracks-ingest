@@ -23,11 +23,11 @@
       "documents": [
         {
           "target-index": "logs",
-          "source-file": "/tmp/recreate.out.zip",
+          "source-file": "/tmp/wc_day54.json.lines.bz2",
           "target-type": "_doc",
-          "document-count": 1000,
-          "compressed-bytes": 7347,
-          "uncompressed-bytes": 111864
+          "document-count": 35898959,
+          "compressed-bytes": 95235777,
+          "uncompressed-bytes": 4005544867
         }
       ]
     }
