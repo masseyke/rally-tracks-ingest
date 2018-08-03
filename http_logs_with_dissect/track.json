@@ -2,7 +2,7 @@
 
 {
   "version": 2,
-  "description": "HTTP server log data for ingest - baseline",
+  "description": "Dissect HTTP server log data",
   "indices": [
     {
       "name": "logs",
@@ -23,11 +23,11 @@
       "documents": [
         {
           "target-index": "logs",
-          "source-file": "/tmp/wc_day54.json.lines.bz2",
+          "source-file": "/tmp/wc_day56.json.lines.bz2",
           "target-type": "_doc",
-          "document-count": 35898959,
-          "compressed-bytes": 95235777,
-          "uncompressed-bytes": 4005544867
+          "document-count": 17390942,
+          "compressed-bytes": 50530054,
+          "uncompressed-bytes": 1941045025
         }
       ]
     }
