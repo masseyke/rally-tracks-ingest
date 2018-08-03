@@ -6,22 +6,28 @@
   "indices": [
     {
       "name": "logs",
-      "body": "index.json",
+      "body": "template_settings.json",
       "types": ["_doc"]
+    }
+  ],
+  "templates": [
+    {
+      "name": "logs_template",
+      "index-pattern": "logs",
+      "template": "template_mapping.json"
     }
   ],
   "corpora": [
     {
-      "name": "apache_baseline",
-      "source-file": "/tmp/apache_access_logs.tar.gz",
+      "name": "http_logs_with_dissect",
       "documents": [
         {
           "target-index": "logs",
-          "source-file": "/tmp/apache_access_logs.tar.gz",
+          "source-file": "/tmp/recreate.out.zip",
           "target-type": "_doc",
-          "document-count": 6900000,
-          "compressed-bytes": 152470581,
-          "uncompressed-bytes": 1555814737
+          "document-count": 1000,
+          "compressed-bytes": 7347,
+          "uncompressed-bytes": 111864
         }
       ]
     }
