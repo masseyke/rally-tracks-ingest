@@ -26,24 +26,24 @@
           "source-file": "/tmp/wc_day55.json.lines.bz2",
           "target-type": "_doc",
           "document-count": 33695769,
-          "compressed-bytes": 163060829,
-          "uncompressed-bytes": 3086940722
+          "compressed-bytes": 88664166,
+          "uncompressed-bytes": 3759779626
         },
         {
           "target-index": "logs",
           "source-file": "/tmp/wc_day56.json.lines.bz2",
           "target-type": "_doc",
           "document-count": 17390942,
-          "compressed-bytes": 85681372,
-          "uncompressed-bytes": 1598487111
+          "compressed-bytes": 50531298,
+          "uncompressed-bytes": 1941045803
         },
         {
           "target-index": "logs",
           "source-file": "/tmp/wc_day57.json.lines.bz2",
           "target-type": "_doc",
           "document-count": 17224132,
-          "compressed-bytes": 85409116,
-          "uncompressed-bytes": 1583164406
+          "compressed-bytes": 50105694,
+          "uncompressed-bytes": 1921572995
         }
       ]
     }
