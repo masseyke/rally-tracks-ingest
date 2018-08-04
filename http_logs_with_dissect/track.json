@@ -19,7 +19,7 @@
   ],
   "corpora": [
     {
-      "name": "http_logs_with_dissect"
+      "name": "http_logs_with_dissect",
       "documents": [
         {
           "target-index": "logs",
