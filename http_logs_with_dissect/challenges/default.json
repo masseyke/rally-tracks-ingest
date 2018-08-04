@@ -28,7 +28,7 @@
         },
         {
           "operation": "index",
-          "warmup-time-period": 30,
+          "warmup-time-period": 60,
           "clients": {{bulk_indexing_clients | default(8)}}
         }
         ]

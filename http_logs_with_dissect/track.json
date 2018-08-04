@@ -19,15 +19,31 @@
   ],
   "corpora": [
     {
-      "name": "http_logs_with_dissect",
+      "name": "http_logs_with_dissect"
       "documents": [
+        {
+          "target-index": "logs",
+          "source-file": "/tmp/wc_day55.json.lines.bz2",
+          "target-type": "_doc",
+          "document-count": 33695769,
+          "compressed-bytes": 163060829,
+          "uncompressed-bytes": 3086940722
+        },
         {
           "target-index": "logs",
           "source-file": "/tmp/wc_day56.json.lines.bz2",
           "target-type": "_doc",
           "document-count": 17390942,
-          "compressed-bytes": 50531298,
-          "uncompressed-bytes": 1941045803
+          "compressed-bytes": 85681372,
+          "uncompressed-bytes": 1598487111
+        },
+        {
+          "target-index": "logs",
+          "source-file": "/tmp/wc_day57.json.lines.bz2",
+          "target-type": "_doc",
+          "document-count": 17224132,
+          "compressed-bytes": 85409116,
+          "uncompressed-bytes": 1583164406
         }
       ]
     }
