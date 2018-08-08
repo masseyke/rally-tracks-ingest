@@ -5,7 +5,7 @@
     "body": {
       "description": "Groks the logs into it's parts",
       "processors": [
-        { "dissect":
+        { "grok":
           { "field": "message",
             "patterns" : [
               "%{IPORHOST:clientip} %{HTTPDUSER} %{USER} \\[%{HTTPDATE:@timestamp}\\] \"(?:%{WORD} %{NOTSPACE:request}(?: HTTP/%{NUMBER})?|%{DATA})\" %{NUMBER:status} (?:%{NUMBER:size}|-)"
