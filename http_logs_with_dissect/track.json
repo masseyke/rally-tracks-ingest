@@ -23,27 +23,27 @@
       "documents": [
         {
           "target-index": "logs",
-          "source-file": "/tmp/wc_day55.json.lines.bz2",
+          "source-file": "/tmp/wc_day55.out.json.bz2",
           "target-type": "_doc",
-          "document-count": 33695769,
-          "compressed-bytes": 88664166,
-          "uncompressed-bytes": 3759779626
+          "document-count": 35735639,
+          "compressed-bytes": 111062349,
+          "uncompressed-bytes": 3953129657
         },
         {
           "target-index": "logs",
-          "source-file": "/tmp/wc_day56.json.lines.bz2",
+          "source-file": "/tmp/wc_day56.out.json.bz2",
           "target-type": "_doc",
-          "document-count": 17390942,
-          "compressed-bytes": 50531298,
-          "uncompressed-bytes": 1941045803
+          "document-count": 17390841,
+          "compressed-bytes": 59181923,
+          "uncompressed-bytes": 1926467924
         },
         {
           "target-index": "logs",
-          "source-file": "/tmp/wc_day57.json.lines.bz2",
+          "source-file": "/tmp/wc_day57.out.json.bz2",
           "target-type": "_doc",
-          "document-count": 17224132,
-          "compressed-bytes": 50105694,
-          "uncompressed-bytes": 1921572995
+          "document-count": 17224057,
+          "compressed-bytes": 58792785,
+          "uncompressed-bytes": 1907123446
         }
       ]
     }
