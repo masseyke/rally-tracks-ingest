@@ -1,0 +1,35 @@
+{
+  "mappings": {
+    "_doc": {
+      "dynamic": "strict",
+      "properties": {
+        "@timestamp": {
+          "format": "dd/MMM/YY:HH:mm:ss",
+          "type": "date"
+        },
+        "clientip": {
+          "type": "ip"
+        },
+        "message": {
+          "type": "object",
+          "enabled": false
+        },
+        "request": {
+          "type": "text",
+          "fields": {
+            "raw": {
+              "ignore_above": 256,
+              "type": "keyword"
+            }
+          }
+        },
+        "status": {
+          "type": "keyword"
+        },
+        "size": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

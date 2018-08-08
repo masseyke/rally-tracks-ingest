@@ -1,0 +1,57 @@
+{% import "rally.helpers" as rally with context %}
+
+{
+  "version": 2,
+  "description": "Grok HTTP server log data",
+  "indices": [
+    {
+      "name": "logs",
+      "body": "template_settings.json",
+      "types": ["_doc"]
+    }
+  ],
+  "templates": [
+    {
+      "name": "logs_template",
+      "index-pattern": "logs",
+      "template": "template_mapping.json"
+    }
+  ],
+  "corpora": [
+    {
+      "name": "http_logs_with_grok",
+      "documents": [
+        {
+          "target-index": "logs",
+          "source-file": "/tmp/wc_day55.out.json.bz2",
+          "target-type": "_doc",
+          "document-count": 35735639,
+          "compressed-bytes": 111062349,
+          "uncompressed-bytes": 3953129657
+        },
+        {
+          "target-index": "logs",
+          "source-file": "/tmp/wc_day56.out.json.bz2",
+          "target-type": "_doc",
+          "document-count": 17390841,
+          "compressed-bytes": 59181923,
+          "uncompressed-bytes": 1926467924
+        },
+        {
+          "target-index": "logs",
+          "source-file": "/tmp/wc_day57.out.json.bz2",
+          "target-type": "_doc",
+          "document-count": 17224057,
+          "compressed-bytes": 58792785,
+          "uncompressed-bytes": 1907123446
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {{ rally.collect(parts="operations/*.json") }}
+  ],
+  "challenges": [
+    {{ rally.collect(parts="challenges/*.json") }}
+  ]
+}

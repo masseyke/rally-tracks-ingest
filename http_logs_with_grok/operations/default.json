@@ -1,0 +1,24 @@
+  {
+    "name": "grok-pipeline",
+    "operation-type": "put-pipeline",
+    "id": "grok-pipeline",
+    "body": {
+      "description": "Groks the logs into it's parts",
+      "processors": [
+        { "dissect":
+          { "field": "message",
+            "patterns" : [
+              "%{IPORHOST:clientip} %{HTTPDUSER} %{USER} \\[%{HTTPDATE:@timestamp}\\] \"(?:%{WORD} %{NOTSPACE:request}(?: HTTP/%{NUMBER})?|%{DATA})\" %{NUMBER:status} (?:%{NUMBER:size}|-)"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+      "name": "index",
+      "operation-type": "bulk",
+      "bulk-size": {{bulk_size | default(5000)}},
+      "ingest-percentage": {{ingest_percentage | default(100)}},
+      "pipeline" : "grok-pipeline"
+    }
