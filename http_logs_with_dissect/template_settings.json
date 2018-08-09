@@ -1,6 +1,6 @@
 {
   "settings": {
-    "index.refresh_interval": "{{number_of_shards | default(1440m)}}",
+    "index.refresh_interval": "1440m",
     "index.default_pipeline": "dissect-pipeline",
     "index.number_of_shards": {{number_of_shards | default(1)}},
     "index.number_of_replicas": {{number_of_replicas | default(0)}}
