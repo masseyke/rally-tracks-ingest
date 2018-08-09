@@ -16,7 +16,8 @@ ingest.url = https://github.com/jakelandis/rally-tracks-ingest
 Usage:
 
 ```bash
-esrally --track=http_logs_baseline --track-repository=ingest
+esrally --track=http_logs_baseline_no_pipeline --track-repository=ingest
+esrally --track=http_logs_baseline_noop_pipeline --track-repository=ingest
 esrally --track=http_logs_with_grok --track-repository=ingest
 esrally --track=http_logs_with_dissect --track-repository=ingest
 ``` 

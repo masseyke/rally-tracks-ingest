@@ -19,7 +19,7 @@
   ],
   "corpora": [
     {
-      "name": "http_logs_baseline_empty_pipeline",
+      "name": "http_logs_baseline_noop_pipeline",
       "base-url": "https://s3.amazonaws.com/data.elasticsearch.org/apache_logs/json_lines",
       "documents": [
         {

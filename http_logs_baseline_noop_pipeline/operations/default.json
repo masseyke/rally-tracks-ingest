@@ -1,10 +1,17 @@
   {
-    "name": "empty-pipeline",
+    "name": "noop-pipeline",
     "operation-type": "put-pipeline",
-    "id": "empty-pipeline",
+    "id": "noop-pipeline",
     "body": {
       "description": "An empty pipeline",
-      "processors": [   ]
+      "processors": [
+        {
+          "uppercase": {
+            "field": "doesnotexist",
+            "ignore_missing": true
+          }
+        }
+      ]
     }
   },
   {
@@ -12,5 +19,5 @@
       "operation-type": "bulk",
       "bulk-size": {{bulk_size | default(5000)}},
       "ingest-percentage": {{ingest_percentage | default(100)}},
-      "pipeline" : "empty-pipeline"
+      "pipeline" : "noop-pipeline"
     }

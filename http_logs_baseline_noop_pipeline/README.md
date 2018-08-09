@@ -1,12 +1,12 @@
-## HTTP logs baseline empty pipeline
+## HTTP logs baseline noop pipeline
 
-Track that indexes HTTP logs without any empty ingest node pipeline. This differs from the "no pipeline" track such that this track also accounts for the overhead needed to run a pipeline. 
+Track that indexes HTTP logs with an ingest node pipeline with a processor that never mutates the document. This differs from the "no pipeline" track such that this track also accounts for the overhead needed to run a pipeline. 
 
 Much like the base [http logs](https://github.com/elastic/rally-tracks/tree/master/http_logs) track, this track is also  based on the [Web server logs from the 1998 Football world cup](http://ita.ee.lbl.gov/html/contrib/WorldCup.html). 
 
 However the base [http logs](https://github.com/elastic/rally-tracks/tree/master/http_logs) track uses logs that are pre-parsed into their respective parts. While this track uses the same source for the data, the exact content and count differs from the [http logs](https://github.com/elastic/rally-tracks/tree/master/http_logs) track.
 
-Further, this track is only focused on optimized, yet (ideally) realistic settings for high volume ingestion. An empty ingest node pipeline is called for this track, and is intended to be used a baseline for other "http_logs_*" tracks.  Query performance is not tested as part of this track. 
+Further, this track is only focused on optimized, yet (ideally) realistic settings for high volume ingestion. An noop ingest node pipeline is called for this track, and is intended to be used a baseline for other "http_logs_*" tracks.  Query performance is not tested as part of this track. 
 
 Modifications from the [Web server logs from the 1998 Football world cup](http://ita.ee.lbl.gov/html/contrib/WorldCup.html): 
 
