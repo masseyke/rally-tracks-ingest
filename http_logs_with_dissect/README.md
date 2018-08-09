@@ -1,33 +1,23 @@
-## HTTP logs track
+## HTTP logs with dissect track
 
+Much like the base [http logs](https://github.com/elastic/rally-tracks/tree/master/http_logs) track, this track is also  based on the [Web server logs from the 1998 Football world cup](http://ita.ee.lbl.gov/html/contrib/WorldCup.html). 
 
-TODO: UPDATE !!
+However the base [http logs](https://github.com/elastic/rally-tracks/tree/master/http_logs) track uses logs that are pre-parsed into their respective parts. While this track uses the same source for the data, the exact content and count differs from the [http logs](https://github.com/elastic/rally-tracks/tree/master/http_logs) track.
 
+Further, this track is only focused on optimized, yet (ideally) realistic settings for high volume ingestion using the dissect processor. Query performance is not tested as part of this track. 
 
+Modifications from the [Web server logs from the 1998 Football world cup](http://ita.ee.lbl.gov/html/contrib/WorldCup.html): 
 
+* Applied "127.0.0.1" for all IP conversions (replaced the integer placeholder)
+* Skipped any log entry that would not result in valid UTF-8 encoding  
+* Transformed the source data to a bulk-friendly JSON format, with "message" as key
 
-
-
-This track is based on [Web server logs from the 1998 Football world cup](http://ita.ee.lbl.gov/html/contrib/WorldCup.html). 
-
-Modifications: 
-
-* Applied number to IP conversion as suggested in the original readme
-* Removed illegal characters in "object_mappings.sort"
-* Transformed the source data to a bulk-friendly JSON format (ignoring all entries that
-  contained unrecognised / problematic characters and invalid IP addresses like "0";
-  around 0.001% of the source data was lost due to this approach)
-
-### Example Document
+### Example Documents
 
 ```json
-{
-  "@timestamp": 898459201,
-  "clientip": "211.11.9.0",
-  "request": "GET /english/index.html HTTP/1.0",
-  "status": 304,
-  "size": 0
-}
+{ "message" : "127.0.0.1 - - [30/Apr/1998:21:30:17 +0000] \"GET /images/hm_bg.jpg HTTP/1.0\" 200 -"}
+{ "message" : "127.0.0.1 - - [30/Apr/1998:21:30:53 +0000] \"GET /images/hm_bg.jpg HTTP/1.0\" 200 -"}
+{ "message" : "127.0.0.1 - - [30/Apr/1998:21:31:12 +0000] \"GET /images/hm_bg.jpg HTTP/1.0\" 200 -"}
 ```
 
 ### Parameters
@@ -41,6 +31,7 @@ This track allows to overwrite the following parameters with Rally 0.8.0+ using 
 * `number_of_shards` (default: 5)
 * `source_enabled` (default: true): A boolean defining whether the `_source` field is stored in the index.
 * `index_settings`: A list of index settings. If it is defined, it replaces *all* other index settings (e.g. `number_of_replicas`).
+* `index.refresh_interval` : (default 1440m) How often to refresh the index. 
 * `cluster_health` (default: "green"): The minimum required cluster health.
 
 ### License

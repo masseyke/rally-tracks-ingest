@@ -20,10 +20,11 @@
   "corpora": [
     {
       "name": "http_logs_with_dissect",
+      "base-url": "https://s3.amazonaws.com/data.elasticsearch.org/apache_logs/json_lines",
       "documents": [
         {
           "target-index": "logs",
-          "source-file": "/tmp/wc_day55.out.json.bz2",
+          "source-file": "wc_day55.out.json.bz2",
           "target-type": "_doc",
           "document-count": 35735639,
           "compressed-bytes": 111062349,
@@ -31,7 +32,7 @@
         },
         {
           "target-index": "logs",
-          "source-file": "/tmp/wc_day56.out.json.bz2",
+          "source-file": "wc_day56.out.json.bz2",
           "target-type": "_doc",
           "document-count": 17390841,
           "compressed-bytes": 59181923,
@@ -39,7 +40,7 @@
         },
         {
           "target-index": "logs",
-          "source-file": "/tmp/wc_day57.out.json.bz2",
+          "source-file": "wc_day57.out.json.bz2",
           "target-type": "_doc",
           "document-count": 17224057,
           "compressed-bytes": 58792785,

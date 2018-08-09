@@ -1,8 +1,8 @@
 {
   "settings": {
-    "index.refresh_interval": "1440m",
-    "index.number_of_replicas": 0,
-    "index.number_of_shards": 1,
-    "index.default_pipeline": "grok-pipeline"
+    "index.refresh_interval": "{{number_of_shards | default(1440m)}}",
+    "index.default_pipeline": "grok-pipeline",
+    "index.number_of_shards": {{number_of_shards | default(1)}},
+    "index.number_of_replicas": {{number_of_replicas | default(0)}}
   }
 }
