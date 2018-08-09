@@ -1,0 +1,16 @@
+  {
+    "name": "empty-pipeline",
+    "operation-type": "put-pipeline",
+    "id": "empty-pipeline",
+    "body": {
+      "description": "An empty pipeline",
+      "processors": [   ]
+    }
+  },
+  {
+      "name": "index",
+      "operation-type": "bulk",
+      "bulk-size": {{bulk_size | default(5000)}},
+      "ingest-percentage": {{ingest_percentage | default(100)}},
+      "pipeline" : "empty-pipeline"
+    }
