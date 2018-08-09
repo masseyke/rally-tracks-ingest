@@ -2,7 +2,7 @@
 
 {
   "version": 2,
-  "description": "Dissect HTTP server log data",
+  "description": "Baseline HTTP server log data",
   "indices": [
     {
       "name": "logs",
@@ -19,7 +19,7 @@
   ],
   "corpora": [
     {
-      "name": "http_logs_with_dissect",
+      "name": "http_logs_baseline",
       "base-url": "https://s3.amazonaws.com/data.elasticsearch.org/apache_logs/json_lines",
       "documents": [
         {
