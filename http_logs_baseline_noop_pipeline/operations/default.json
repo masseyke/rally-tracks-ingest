@@ -3,7 +3,7 @@
     "operation-type": "put-pipeline",
     "id": "noop-pipeline",
     "body": {
-      "description": "An empty pipeline",
+      "description": "An do nothing pipeline",
       "processors": [
         {
           "uppercase": {
