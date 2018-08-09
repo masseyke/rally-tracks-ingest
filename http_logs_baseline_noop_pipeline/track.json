@@ -2,7 +2,7 @@
 
 {
   "version": 2,
-  "description": "Baseline: empty pipeline - HTTP server log data",
+  "description": "Baseline: noop pipeline - HTTP server log data",
   "indices": [
     {
       "name": "logs",
