@@ -21,13 +21,7 @@
         },
         "request": {
           "type": "object",
-          "enabled": false,
-          "fields": {
-            "raw": {
-              "ignore_above": 256,
-              "type": "keyword"
-            }
-          }
+          "enabled": false
         },
         "status": {
           "type": "object",
