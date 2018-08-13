@@ -1,6 +1,6 @@
 ## HTTP logs baseline noop pipeline
 
-Track that indexes HTTP logs with an ingest node pipeline with a processor that never mutates the document. This differs from the "no pipeline" track such that this track also accounts for the overhead needed to run a pipeline. 
+Track that indexes HTTP logs with an ingest node pipeline with a processor that never mutates the document. 
 
 Much like the base [http logs](https://github.com/elastic/rally-tracks/tree/master/http_logs) track, this track is also  based on the [Web server logs from the 1998 Football world cup](http://ita.ee.lbl.gov/html/contrib/WorldCup.html). 
 
@@ -21,19 +21,6 @@ Modifications from the [Web server logs from the 1998 Football world cup](http:/
 { "message" : "127.0.0.1 - - [30/Apr/1998:21:30:53 +0000] \"GET /images/hm_bg.jpg HTTP/1.0\" 200 -"}
 { "message" : "127.0.0.1 - - [30/Apr/1998:21:31:12 +0000] \"GET /images/hm_bg.jpg HTTP/1.0\" 200 -"}
 ```
-
-### Parameters
-
-This track allows to overwrite the following parameters with Rally 0.8.0+ using `--track-params`:
-
-* `bulk_size` (default: 5000)
-* `bulk_indexing_clients` (default: 8): Number of clients that issue bulk indexing requests.
-* `ingest_percentage` (default: 100): A number between 0 and 100 that defines how much of the document corpus should be ingested.
-* `number_of_replicas` (default: 0)
-* `number_of_shards` (default: 5)
-* `source_enabled` (default: true): A boolean defining whether the `_source` field is stored in the index.
-* `index_settings`: A list of index settings. If it is defined, it replaces *all* other index settings (e.g. `number_of_replicas`).
-* `cluster_health` (default: "green"): The minimum required cluster health.
 
 ### License
 

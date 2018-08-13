@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "description": "Baseline - No pipeline HTTP server log data",
+  "description": "Baseline - Noop HTTP server log data",
   "corpora": [
     {
       "name": "http_logs_with_noop",
@@ -35,6 +35,22 @@
   ],
   "operations": [
     {
+      "name": "create-noop-pipeline",
+      "operation-type": "put-pipeline",
+      "id": "noop-pipeline",
+      "body": {
+        "description": "An do nothing pipeline",
+        "processors": [
+          {
+            "uppercase": {
+              "field": "doesnotexist",
+              "ignore_missing": true
+            }
+          }
+        ]
+      }
+    },
+    {
       "operation-type": "delete-index",
       "name": "delete-logs-index",
       "index": "logs"
@@ -57,28 +73,28 @@
             },
             "properties": {
               "@timestamp": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "clientip": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "message": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "request": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "status": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "size": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               }
             }
           }
@@ -91,6 +107,7 @@
       "indices": "logs",
       "bulk-size": 5000,
       "ingest-percentage": 100,
+      "pipeline": "noop-pipeline"
     },
     {
       "operation-type": "cluster-health",
@@ -108,6 +125,9 @@
       "description": "Indexes the whole document.",
       "default": true,
       "schedule": [
+        {
+          "operation": "create-noop-pipeline"
+        },
         {
           "operation": "delete-logs-index"
         },

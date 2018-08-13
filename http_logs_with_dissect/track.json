@@ -73,28 +73,28 @@
             },
             "properties": {
               "@timestamp": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "clientip": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "message": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "request": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "status": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               },
               "size": {
-                "type": "object",
-                "enabled": false
+                "enabled": false,
+                "doc_values": false
               }
             }
           }
