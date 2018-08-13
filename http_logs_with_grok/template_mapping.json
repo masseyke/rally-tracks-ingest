@@ -5,10 +5,12 @@
       "properties": {
         "@timestamp": {
           "format": "dd/MMM/YY:HH:mm:ss",
-          "type": "date"
+          "type": "date",
+          "index": false
         },
         "clientip": {
-          "type": "ip"
+          "type": "ip",
+          "index": false
         },
         "message": {
           "type": "object",
@@ -16,6 +18,7 @@
         },
         "request": {
           "type": "text",
+          "index": false,
           "fields": {
             "raw": {
               "ignore_above": 256,
@@ -24,10 +27,12 @@
           }
         },
         "status": {
-          "type": "keyword"
+          "type": "keyword",
+          "index": false
         },
         "size": {
-          "type": "keyword"
+          "type": "keyword",
+          "index": false
         }
       }
     }
