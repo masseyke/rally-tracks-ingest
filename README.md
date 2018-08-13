@@ -17,9 +17,9 @@ Usage:
 
 via track-repository
 ```bash
-esrally --track=http_logs_for_ingest --track-repository=ingest -challenge=baseline
-esrally --track=http_logs_for_ingest --track-repository=ingest -challenge=grok
-esrally --track=http_logs_for_ingest --track-repository=ingest -challenge=dissect
+esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=baseline
+esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=grok
+esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=dissect
 ``` 
  
 testing locally (first run is very slow, but subsequent are fast):
