@@ -7,7 +7,7 @@
       "base-url": "https://s3.amazonaws.com/data.elasticsearch.org/apache_logs/json_lines",
       "documents": [
         {
-          "target-index": "logs",
+          "target-index": "ingest-only",
           "source-file": "wc_day55.out.json.bz2",
           "target-type": "_doc",
           "document-count": 35735639,
@@ -15,7 +15,7 @@
           "uncompressed-bytes": 3953129657
         },
         {
-          "target-index": "logs",
+          "target-index": "ingest-only",
           "source-file": "wc_day56.out.json.bz2",
           "target-type": "_doc",
           "document-count": 17390841,
@@ -23,7 +23,7 @@
           "uncompressed-bytes": 1926467924
         },
         {
-          "target-index": "logs",
+          "target-index": "ingest-only",
           "source-file": "wc_day57.out.json.bz2",
           "target-type": "_doc",
           "document-count": 17224057,
