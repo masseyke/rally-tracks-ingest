@@ -1,0 +1,417 @@
+{
+  "version": 2,
+  "description": "Ingest HTTP server log data",
+  "corpora": [
+    {
+      "name": "default",
+      "base-url": "https://s3.amazonaws.com/data.elasticsearch.org/apache_logs/json_lines",
+      "documents": [
+        {
+          "target-index": "logs",
+          "source-file": "wc_day55.out.json.bz2",
+          "target-type": "_doc",
+          "document-count": 35735639,
+          "compressed-bytes": 111062349,
+          "uncompressed-bytes": 3953129657
+        },
+        {
+          "target-index": "logs",
+          "source-file": "wc_day56.out.json.bz2",
+          "target-type": "_doc",
+          "document-count": 17390841,
+          "compressed-bytes": 59181923,
+          "uncompressed-bytes": 1926467924
+        },
+        {
+          "target-index": "logs",
+          "source-file": "wc_day57.out.json.bz2",
+          "target-type": "_doc",
+          "document-count": 17224057,
+          "compressed-bytes": 58792785,
+          "uncompressed-bytes": 1907123446
+        }
+      ]
+    },
+    {
+      "name": "manual",
+      "base-url": "https://s3.amazonaws.com/data.elasticsearch.org/apache_logs/json_lines",
+      "documents": [
+        {
+          "target-index": "logs",
+          "source-file": "example.out.json.bz2",
+          "target-type": "_doc",
+          "document-count": 1000,
+          "compressed-bytes": 6042,
+          "uncompressed-bytes": 111174
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "name": "create-noop-pipeline",
+      "operation-type": "put-pipeline",
+      "id": "noop-pipeline",
+      "body": {
+        "description": "An do nothing pipeline",
+        "processors": [
+          {
+            "uppercase": {
+              "field": "doesnotexist",
+              "ignore_missing": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "create-grok-pipeline",
+      "operation-type": "put-pipeline",
+      "id": "grok-pipeline",
+      "body": {
+        "description": "Groks the logs into it's parts",
+        "processors": [
+          {
+            "grok": {
+              "field": "message",
+              "patterns": [
+                "%{IPORHOST:clientip} %{HTTPDUSER} %{USER} \\[%{HTTPDATE:@timestamp}\\] \"(?:%{WORD} %{NOTSPACE:request}(?: HTTP/%{NUMBER})?|%{DATA})\" %{NUMBER:status} (?:%{NUMBER:size}|-)"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "create-dissect-pipeline",
+      "operation-type": "put-pipeline",
+      "id": "dissect-pipeline",
+      "body": {
+        "description": "Dissects the logs into it's parts",
+        "processors": [
+          {
+            "dissect": {
+              "field": "message",
+              "pattern": "%{clientip} %{?ident} %{?auth} [%{@timestamp} %{}] \"%{?verb} %{request} HTTP/%{?httpversion}\" %{status} %{size}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation-type": "delete-index",
+      "name": "delete-logs-index",
+      "index": "logs"
+    },
+    {
+      "operation-type": "create-index",
+      "name": "create-logs-index",
+      "index": "logs",
+      "body": {
+        "settings": {
+          "index.refresh_interval": -1,
+          "index.number_of_shards": 1,
+          "index.number_of_replicas": 0
+        },
+        "mappings": {
+          "_doc": {
+            "dynamic": "strict",
+            "_source": {
+              "enabled": false
+            },
+            "properties": {
+              "@timestamp": {
+                "type": "object",
+                "enabled": false,
+                "doc_values": false
+              },
+              "clientip": {
+                "type": "object",
+                "enabled": false,
+                "doc_values": false
+              },
+              "message": {
+                "type": "object",
+                "enabled": false,
+                "doc_values": false
+              },
+              "request": {
+                "type": "object",
+                "enabled": false,
+                "doc_values": false
+              },
+              "status": {
+                "type": "object",
+                "enabled": false,
+                "doc_values": false
+              },
+              "size": {
+                "type": "object",
+                "enabled": false,
+                "doc_values": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation-type": "create-index",
+      "name": "create-index-for-manual-testing",
+      "index": "logs",
+      "body": {
+        "settings": {
+          "index.refresh_interval": "5s",
+          "index.number_of_shards": 1,
+          "index.number_of_replicas": 0
+        },
+        "mappings": {
+          "_doc": {
+            "dynamic": "strict",
+            "properties": {
+              "@timestamp": {
+                "type": "keyword"
+              },
+              "clientip": {
+                "type": "keyword"
+              },
+              "message": {
+                "type": "text",
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "type": "keyword"
+                  }
+                }
+              },
+              "request": {
+                "type": "text",
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "type": "keyword"
+                  }
+                }
+              },
+              "status": {
+                "type": "keyword"
+              },
+              "size": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation-type": "bulk",
+      "name": "process-noop",
+      "indices": "logs",
+      "bulk-size": 5000,
+      "ingest-percentage": 100,
+      "pipeline": "noop-pipeline",
+      "corpora": "default"
+    },
+    {
+      "operation-type": "bulk",
+      "name": "process-noop-manual",
+      "indices": "logs",
+      "bulk-size": 5000,
+      "ingest-percentage": 100,
+      "pipeline": "noop-pipeline",
+      "corpora": "manual"
+    },
+    {
+      "operation-type": "bulk",
+      "name": "process-grok",
+      "indices": "logs",
+      "bulk-size": 5000,
+      "ingest-percentage": 100,
+      "pipeline": "grok-pipeline",
+      "corpora": "default"
+    },
+    {
+      "operation-type": "bulk",
+      "name": "process-grok-manual",
+      "indices": "logs",
+      "bulk-size": 5000,
+      "ingest-percentage": 100,
+      "pipeline": "grok-pipeline",
+      "corpora": "manual"
+    },
+    {
+      "operation-type": "bulk",
+      "name": "process-dissect",
+      "indices": "logs",
+      "bulk-size": 5000,
+      "ingest-percentage": 100,
+      "pipeline": "dissect-pipeline",
+      "corpora": "default"
+    },
+    {
+      "operation-type": "bulk",
+      "name": "process-dissect-manual",
+      "indices": "logs",
+      "bulk-size": 5000,
+      "ingest-percentage": 100,
+      "pipeline": "dissect-pipeline",
+      "corpora": "manual"
+    },
+    {
+      "operation-type": "cluster-health",
+      "name": "wait-for-green",
+      "index": "logs",
+      "request-params": {
+        "wait_for_status": "green",
+        "wait_for_no_relocating_shards": "true"
+      }
+    }
+  ],
+  "challenges": [
+    {
+      "name": "baseline",
+      "description": "Pushes data through an ingest pipeline that does nothing, does not create index data.",
+      "default": true,
+      "schedule": [
+        {
+          "operation": "create-noop-pipeline"
+        },
+        {
+          "operation": "delete-logs-index"
+        },
+        {
+          "operation": "create-logs-index"
+        },
+        {
+          "operation": "wait-for-green"
+        },
+        {
+          "operation": "process-noop",
+          "warmup-time-period": 60,
+          "clients": 8
+        }
+      ]
+    },
+    {
+      "name": "grok",
+      "description": "Pushes data through a grok pipeline, does not create index data.",
+      "default": false,
+      "schedule": [
+        {
+          "operation": "create-grok-pipeline"
+        },
+        {
+          "operation": "delete-logs-index"
+        },
+        {
+          "operation": "create-logs-index"
+        },
+        {
+          "operation": "wait-for-green"
+        },
+        {
+          "operation": "process-grok",
+          "warmup-time-period": 60,
+          "clients": 8
+        }
+      ]
+    },
+    {
+      "name": "dissect",
+      "description": "Pushes data through a dissect pipeline, does not create index data.",
+      "default": false,
+      "schedule": [
+        {
+          "operation": "create-dissect-pipeline"
+        },
+        {
+          "operation": "delete-logs-index"
+        },
+        {
+          "operation": "create-logs-index"
+        },
+        {
+          "operation": "wait-for-green"
+        },
+        {
+          "operation": "process-dissect",
+          "warmup-time-period": 60,
+          "clients": 8
+        }
+      ]
+    },
+    {
+      "name": "baseline-manual",
+      "description": "esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=baseline-manual",
+      "default": false,
+      "schedule": [
+        {
+          "operation": "create-noop-pipeline"
+        },
+        {
+          "operation": "delete-logs-index"
+        },
+        {
+          "operation": "create-index-for-manual-testing"
+        },
+        {
+          "operation": "wait-for-green"
+        },
+        {
+          "operation": "process-noop-manual",
+          "warmup-time-period": 0,
+          "clients": 2
+        }
+      ]
+    },
+    {
+      "name": "grok-manual",
+      "description": "esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=grok-manual",
+      "default": false,
+      "schedule": [
+        {
+          "operation": "create-grok-pipeline"
+        },
+        {
+          "operation": "delete-logs-index"
+        },
+        {
+          "operation": "create-index-for-manual-testing"
+        },
+        {
+          "operation": "wait-for-green"
+        },
+        {
+          "operation": "process-grok-manual",
+          "warmup-time-period": 0,
+          "clients": 2
+        }
+      ]
+    },
+    {
+      "name": "dissect-manual",
+      "description": "esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=dissect-manual",
+      "default": false,
+      "schedule": [
+        {
+          "operation": "create-dissect-pipeline"
+        },
+        {
+          "operation": "delete-logs-index"
+        },
+        {
+          "operation": "create-index-for-manual-testing"
+        },
+        {
+          "operation": "wait-for-green"
+        },
+        {
+          "operation": "process-dissect-manual",
+          "warmup-time-period": 0,
+          "clients": 2
+        }
+      ]
+    }
+  ]
+}
