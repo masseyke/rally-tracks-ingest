@@ -7,20 +7,20 @@
       },
       "properties": {
         "@timestamp": {
-          "format": "dd/MMM/YY:HH:mm:ss",
-          "type": "date",
+          "type": "object",
           "enabled": false
         },
         "clientip": {
-          "type": "ip",
+          "type": "object",
           "enabled": false
         },
         "message": {
           "type": "object",
           "enabled": false
+
         },
         "request": {
-          "type": "text",
+          "type": "object",
           "enabled": false,
           "fields": {
             "raw": {
@@ -30,11 +30,11 @@
           }
         },
         "status": {
-          "type": "keyword",
+          "type": "object",
           "enabled": false
         },
         "size": {
-          "type": "keyword",
+          "type": "object",
           "enabled": false
         }
       }
