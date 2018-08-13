@@ -1,25 +1,9 @@
-{% import "rally.helpers" as rally with context %}
-
 {
   "version": 2,
-  "description": "Baseline: no pipeline - HTTP server log data",
-  "indices": [
-    {
-      "name": "logs",
-      "body": "template_settings.json",
-      "types": ["_doc"]
-    }
-  ],
-  "templates": [
-    {
-      "name": "logs_template",
-      "index-pattern": "logs",
-      "template": "template_mapping.json"
-    }
-  ],
+  "description": "Baseline - No pipeline HTTP server log data",
   "corpora": [
     {
-      "name": "http_logs_baseline_no_pipeline",
+      "name": "http_logs_with_noop",
       "base-url": "https://s3.amazonaws.com/data.elasticsearch.org/apache_logs/json_lines",
       "documents": [
         {
@@ -50,9 +34,95 @@
     }
   ],
   "operations": [
-    {{ rally.collect(parts="operations/*.json") }}
+    {
+      "operation-type": "delete-index",
+      "name": "delete-logs-index",
+      "index": "logs"
+    },
+    {
+      "operation-type": "create-index",
+      "name": "create-logs-index",
+      "index": "logs",
+      "body": {
+        "settings": {
+          "index.refresh_interval": -1,
+          "index.number_of_shards": 1,
+          "index.number_of_replicas": 0
+        },
+        "mappings": {
+          "_doc": {
+            "dynamic": "strict",
+            "_source": {
+              "enabled": false
+            },
+            "properties": {
+              "@timestamp": {
+                "type": "object",
+                "enabled": false
+              },
+              "clientip": {
+                "type": "object",
+                "enabled": false
+              },
+              "message": {
+                "type": "object",
+                "enabled": false
+              },
+              "request": {
+                "type": "object",
+                "enabled": false
+              },
+              "status": {
+                "type": "object",
+                "enabled": false
+              },
+              "size": {
+                "type": "object",
+                "enabled": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "operation-type": "bulk",
+      "name": "perform-indexing",
+      "indices": "logs",
+      "bulk-size": 5000,
+      "ingest-percentage": 100,
+    },
+    {
+      "operation-type": "cluster-health",
+      "name": "wait-for-green",
+      "index": "logs",
+      "request-params": {
+        "wait_for_status": "green",
+        "wait_for_no_relocating_shards": "true"
+      }
+    }
   ],
   "challenges": [
-    {{ rally.collect(parts="challenges/*.json") }}
+    {
+      "name": "index",
+      "description": "Indexes the whole document.",
+      "default": true,
+      "schedule": [
+        {
+          "operation": "delete-logs-index"
+        },
+        {
+          "operation": "create-logs-index"
+        },
+        {
+          "operation": "wait-for-green"
+        },
+        {
+          "operation": "perform-indexing",
+          "warmup-time-period": 60,
+          "clients": 8
+        }
+      ]
+    }
   ]
 }
