@@ -2,15 +2,18 @@
   "mappings": {
     "_doc": {
       "dynamic": "strict",
+      "_source": {
+        "enabled": false
+      },
       "properties": {
         "@timestamp": {
           "format": "dd/MMM/YY:HH:mm:ss",
           "type": "date",
-          "index": false
+          "enabled": false
         },
         "clientip": {
           "type": "ip",
-          "index": false
+          "enabled": false
         },
         "message": {
           "type": "object",
@@ -18,7 +21,7 @@
         },
         "request": {
           "type": "text",
-          "index": false,
+          "enabled": false,
           "fields": {
             "raw": {
               "ignore_above": 256,
@@ -28,11 +31,11 @@
         },
         "status": {
           "type": "keyword",
-          "index": false
+          "enabled": false
         },
         "size": {
           "type": "keyword",
-          "index": false
+          "enabled": false
         }
       }
     }
