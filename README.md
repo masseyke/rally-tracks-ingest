@@ -21,6 +21,14 @@ esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=basel
 esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=grok
 esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=dissect
 ``` 
+
+test mode
+```bash
+esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=baseline --test-mode
+esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=grok --test-mode
+esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=dissect --test-mode
+``` 
+
  
 testing locally (first run is very slow, but subsequent are fast):
 ```bash

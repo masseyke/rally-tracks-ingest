@@ -4,45 +4,70 @@
   "corpora": [
     {
       "name": "default",
-      "base-url": "https://s3.amazonaws.com/data.elasticsearch.org/apache_logs/json_lines",
+      "base-url": "http://benchmarks.elasticsearch.org.s3.amazonaws.com/corpora/http_logs",
       "documents": [
         {
-          "target-index": "logs",
-          "source-file": "wc_day55.out.json.bz2",
-          "target-type": "_doc",
-          "document-count": 35735639,
-          "compressed-bytes": 111062349,
-          "uncompressed-bytes": 3953129657
+          "target-index": "logs-181998",
+          "source-file": "documents-181998.unparsed.json.bz2",
+          "document-count": 2708746,
+          "compressed-bytes": 13064317,
+          "uncompressed-bytes": 303920342
         },
         {
-          "target-index": "logs",
-          "source-file": "wc_day56.out.json.bz2",
-          "target-type": "_doc",
-          "document-count": 17390841,
-          "compressed-bytes": 59181923,
-          "uncompressed-bytes": 1926467924
+          "target-index": "logs-191998",
+          "source-file": "documents-191998.unparsed.json.bz2",
+          "document-count": 9697882,
+          "compressed-bytes": 47212456,
+          "uncompressed-bytes": 1088378739
         },
         {
-          "target-index": "logs",
-          "source-file": "wc_day57.out.json.bz2",
-          "target-type": "_doc",
-          "document-count": 17224057,
-          "compressed-bytes": 58792785,
-          "uncompressed-bytes": 1907123446
+          "target-index": "logs-201998",
+          "source-file": "documents-201998.unparsed.json.bz2",
+          "document-count": 13053463,
+          "compressed-bytes": 63175082,
+          "uncompressed-bytes": 1456836091
+        },
+        {
+          "target-index": "logs-211998",
+          "source-file": "documents-211998.unparsed.json.bz2",
+          "document-count": 17647279,
+          "compressed-bytes": 85607190,
+          "uncompressed-bytes": 1975990671
+        },
+        {
+          "target-index": "logs-221998",
+          "source-file": "documents-221998.unparsed.json.bz2",
+          "document-count": 10716760,
+          "compressed-bytes": 53190588,
+          "uncompressed-bytes": 1202551385
+        },
+        {
+          "target-index": "logs-231998",
+          "source-file": "documents-231998.unparsed.json.bz2",
+          "document-count": 11961342,
+          "compressed-bytes": 60705500,
+          "uncompressed-bytes": 1334381146
+        },
+        {
+          "target-index": "logs-241998",
+          "source-file": "documents-241998.unparsed.json.bz2",
+          "document-count": 181463624,
+          "compressed-bytes": 897719968,
+          "uncompressed-bytes": 20563705716
         }
       ]
     },
     {
       "name": "manual",
-      "base-url": "https://s3.amazonaws.com/data.elasticsearch.org/apache_logs/json_lines",
+      "base-url": "http://benchmarks.elasticsearch.org.s3.amazonaws.com/corpora/http_logs",
       "documents": [
         {
           "target-index": "logs",
-          "source-file": "example.out.json.bz2",
+          "source-file": "documents-191998.unparsed-1k.json.bz2",
           "target-type": "_doc",
           "document-count": 1000,
-          "compressed-bytes": 6042,
-          "uncompressed-bytes": 111174
+          "compressed-bytes": 6892,
+          "uncompressed-bytes": 112774
         }
       ]
     }
@@ -75,7 +100,7 @@
             "grok": {
               "field": "message",
               "patterns": [
-                "%{IPORHOST:clientip} %{HTTPDUSER} %{USER} \\[%{HTTPDATE:@timestamp}\\] \"(?:%{WORD} %{NOTSPACE:request}(?: HTTP/%{NUMBER})?|%{DATA})\" %{NUMBER:status} (?:%{NUMBER:size}|-)"
+                "%{IPORHOST:clientip} %{HTTPDUSER} %{USER} \\[%{TIMESTAMP_ISO8601:@timestamp}\\] \"(?:%{WORD} %{NOTSPACE:request}(?: HTTP/%{NUMBER})?|%{DATA})\" %{NUMBER:status} (?:%{NUMBER:size}|-)"
               ]
             }
           }
@@ -92,7 +117,7 @@
           {
             "dissect": {
               "field": "message",
-              "pattern": "%{clientip} %{?ident} %{?auth} [%{@timestamp} %{}] \"%{?verb} %{request} HTTP/%{?httpversion}\" %{status} %{size}"
+              "pattern": "%{clientip} %{?ident} %{?auth} [%{@timestamp}] \"%{?verb} %{request} HTTP/%{?httpversion}\" %{status} %{size}"
             }
           }
         ]
@@ -173,19 +198,15 @@
             "dynamic": "strict",
             "properties": {
               "@timestamp": {
-                "type": "keyword"
+                "type": "date"
               },
               "clientip": {
-                "type": "keyword"
+                "type": "ip"
               },
               "message": {
-                "type": "text",
-                "fields": {
-                  "raw": {
-                    "ignore_above": 256,
-                    "type": "keyword"
-                  }
-                }
+                "type": "keyword",
+                "index": false,
+                "doc_values": false
               },
               "request": {
                 "type": "text",
@@ -197,10 +218,10 @@
                 }
               },
               "status": {
-                "type": "keyword"
+                "type": "integer"
               },
               "size": {
-                "type": "keyword"
+                "type": "integer"
               }
             }
           }
