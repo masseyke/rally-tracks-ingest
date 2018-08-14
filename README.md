@@ -30,12 +30,12 @@ esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=disse
 ``` 
 
  
-testing locally (first run is very slow, but subsequent are fast):
+testing locally :
 ```bash
 esrally list tracks --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest
-esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=baseline-manual
-esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=grok-manual
-esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=dissect-manual
+esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=baseline-manual --test-mode
+esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=grok-manual --test-mode
+esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=dissect-manual --test-mode
 
 ``` 
 

@@ -70,11 +70,11 @@
       "documents": [
         {
           "target-index": "logs",
-          "source-file": "documents-191998.unparsed-1k.json.bz2",
           "target-type": "_doc",
-          "document-count": 1000,
-          "compressed-bytes": 6892,
-          "uncompressed-bytes": 112774
+          "source-file": "documents-181998.unparsed.json.bz2",
+          "document-count": 2708746,
+          "compressed-bytes": 13064317,
+          "uncompressed-bytes": 303920342
         }
       ]
     }
