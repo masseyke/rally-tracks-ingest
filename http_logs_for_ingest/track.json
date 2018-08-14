@@ -119,6 +119,9 @@
             "_source": {
               "enabled": false
             },
+            "_field_names": {
+              "enabled": false
+            },
             "properties": {
               "@timestamp": {
                 "type": "keyword",
