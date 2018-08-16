@@ -3,7 +3,7 @@
   "description": "Ingest HTTP server log data",
   "corpora": [
     {
-      "name": "default",
+      "name": "http_logs_unparsed",
       "base-url": "http://benchmarks.elasticsearch.org.s3.amazonaws.com/corpora/http_logs",
       "documents": [
         {
@@ -242,7 +242,7 @@
       "bulk-size": 5000,
       "ingest-percentage": 100,
       "pipeline": "noop-pipeline",
-      "corpora": "default"
+      "corpora": "http_logs_unparsed"
     },
     {
       "operation-type": "bulk",
@@ -260,7 +260,7 @@
       "bulk-size": 5000,
       "ingest-percentage": 100,
       "pipeline": "grok-pipeline",
-      "corpora": "default"
+      "corpora": "http_logs_unparsed"
     },
     {
       "operation-type": "bulk",
@@ -278,7 +278,7 @@
       "bulk-size": 5000,
       "ingest-percentage": 100,
       "pipeline": "dissect-pipeline",
-      "corpora": "default"
+      "corpora": "http_logs_unparsed"
     },
     {
       "operation-type": "bulk",
