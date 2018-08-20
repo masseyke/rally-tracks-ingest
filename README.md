@@ -20,6 +20,8 @@ via track-repository
 esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=baseline
 esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=grok
 esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=dissect
+esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=geoip  --elasticsearch-plugins="ingest-geoip"
+
 ``` 
 
 test mode
@@ -27,17 +29,13 @@ test mode
 esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=baseline --test-mode
 esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=grok --test-mode
 esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=dissect --test-mode
+esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=geoip  --elasticsearch-plugins="ingest-geoip" --test-mode
 ``` 
 
  
-testing locally :
-```bash
-esrally list tracks --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest
-esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=baseline-manual --test-mode
-esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=grok-manual --test-mode
-esrally --track-path=~/workspace/rally-tracks-ingest/http_logs_for_ingest --target-hosts=localhost:9200 --pipeline=benchmark-only --challenge=dissect-manual --test-mode
-
-``` 
+`--track-params` options:
+* corpora : `http_logs_unparsed`,  `http_logs`,  `manual`
+* index_name : `logs`, `manual` 
 
  
 ### Data
