@@ -19,23 +19,23 @@
           "target-type": "_doc",
           "source-file": "documents-191998.unparsed.json.bz2",
           "document-count": 9697882,
-          "compressed-bytes": 47212456,
-          "uncompressed-bytes": 1088378739
+          "compressed-bytes": 47211781,
+          "uncompressed-bytes": 1088378738
         },
         {
           "target-index": "logs",
           "target-type": "_doc",
           "source-file": "documents-201998.unparsed.json.bz2",
           "document-count": 13053463,
-          "compressed-bytes": 63175082,
-          "uncompressed-bytes": 1456836091
+          "compressed-bytes": 63174979,
+          "uncompressed-bytes": 1456836090
         },
         {
           "target-index": "logs",
           "target-type": "_doc",
           "source-file": "documents-211998.unparsed.json.bz2",
           "document-count": 17647279,
-          "compressed-bytes": 85607190,
+          "compressed-bytes": 85607179,
           "uncompressed-bytes": 1975990671
         },
         {
@@ -43,16 +43,16 @@
           "target-type": "_doc",
           "source-file": "documents-221998.unparsed.json.bz2",
           "document-count": 10716760,
-          "compressed-bytes": 53190588,
-          "uncompressed-bytes": 1202551385
+          "compressed-bytes": 53190976,
+          "uncompressed-bytes": 1202551382
         },
         {
           "target-index": "logs",
           "target-type": "_doc",
           "source-file": "documents-231998.unparsed.json.bz2",
           "document-count": 11961342,
-          "compressed-bytes": 60705500,
-          "uncompressed-bytes": 1334381146
+          "compressed-bytes": 60705435,
+          "uncompressed-bytes": 1334381144
         },
         {
           "target-index": "logs",
