@@ -17,19 +17,19 @@ Usage:
 
 via track-repository
 ```bash
-esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=baseline
-esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=grok
-esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=dissect
-esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=geoip  --elasticsearch-plugins="ingest-geoip"
+esrally race --track=http_logs_for_ingest --track-repository=ingest --challenge=baseline
+esrally race --track=http_logs_for_ingest --track-repository=ingest --challenge=grok
+esrally race --track=http_logs_for_ingest --track-repository=ingest --challenge=dissect
+esrally race --track=http_logs_for_ingest --track-repository=ingest --challenge=geoip  --elasticsearch-plugins="ingest-geoip"
 
 ``` 
 
 test mode
 ```bash
-esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=baseline --test-mode
-esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=grok --test-mode
-esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=dissect --test-mode
-esrally --track=http_logs_for_ingest --track-repository=ingest --challenge=geoip  --elasticsearch-plugins="ingest-geoip" --test-mode
+esrally race --track=http_logs_for_ingest --track-repository=ingest --challenge=baseline --test-mode
+esrally race --track=http_logs_for_ingest --track-repository=ingest --challenge=grok --test-mode
+esrally race --track=http_logs_for_ingest --track-repository=ingest --challenge=dissect --test-mode
+esrally race --track=http_logs_for_ingest --track-repository=ingest --challenge=geoip  --elasticsearch-plugins="ingest-geoip" --test-mode
 ``` 
 
  
