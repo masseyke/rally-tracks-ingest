@@ -8,7 +8,6 @@
       "documents": [
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-181998.unparsed.json.bz2",
           "document-count": 2708746,
           "compressed-bytes": 13064317,
@@ -16,7 +15,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-191998.unparsed.json.bz2",
           "document-count": 9697882,
           "compressed-bytes": 47211781,
@@ -24,7 +22,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-201998.unparsed.json.bz2",
           "document-count": 13053463,
           "compressed-bytes": 63174979,
@@ -32,7 +29,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-211998.unparsed.json.bz2",
           "document-count": 17647279,
           "compressed-bytes": 85607179,
@@ -40,7 +36,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-221998.unparsed.json.bz2",
           "document-count": 10716760,
           "compressed-bytes": 53190976,
@@ -48,7 +43,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-231998.unparsed.json.bz2",
           "document-count": 11961342,
           "compressed-bytes": 60705435,
@@ -56,7 +50,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-241998.unparsed.json.bz2",
           "document-count": 181463624,
           "compressed-bytes": 897719968,
@@ -70,7 +63,6 @@
       "documents": [
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-181998.unparsed.json.bz2",
           "document-count": 2708746,
           "compressed-bytes": 13064317,
@@ -84,7 +76,6 @@
       "documents": [
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-181998.json.bz2",
           "document-count": 2708746,
           "compressed-bytes": 13843641,
@@ -92,7 +83,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-191998.json.bz2",
           "document-count": 9697882,
           "compressed-bytes": 49546887,
@@ -100,7 +90,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-201998.json.bz2",
           "document-count": 13053463,
           "compressed-bytes": 65759419,
@@ -108,7 +97,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-211998.json.bz2",
           "document-count": 17647279,
           "compressed-bytes": 88445049,
@@ -116,7 +104,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-221998.json.bz2",
           "document-count": 10716760,
           "compressed-bytes": 54274027,
@@ -124,7 +111,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-231998.json.bz2",
           "document-count": 11961342,
           "compressed-bytes": 61043842,
@@ -132,7 +118,6 @@
         },
         {
           "target-index": "logs",
-          "target-type": "_doc",
           "source-file": "documents-241998.json.bz2",
           "document-count": 181463624,
           "compressed-bytes": 907295259,
@@ -228,14 +213,6 @@
           "index.number_of_replicas": 0
         },
         "mappings": {
-          "_doc": {
-            "dynamic": "strict",
-            "_source": {
-              "enabled": false
-            },
-            "_field_names": {
-              "enabled": false
-            },
             "properties": {
               "@timestamp": {
                 "type": "keyword",
@@ -272,7 +249,6 @@
                 "enabled": false
               }
             }
-          }
         }
       }
     },
@@ -287,8 +263,6 @@
           "index.number_of_replicas": 0
         },
         "mappings": {
-          "_doc": {
-            "dynamic": "strict",
             "properties": {
               "@timestamp": {
                 "type": "date"
@@ -317,7 +291,6 @@
                 "type": "integer"
               }
             }
-          }
         }
       }
     },
